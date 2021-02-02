@@ -314,9 +314,9 @@ func (e *LibvirtExporter) CollectDomain(ch chan<- prometheus.Metric, domain *lib
 	memMax := uint64(0)
 	memStat, err := domain.MemoryStats(11, 0)
 	for _, buf := range memStat {
-		if buf.Tag == int32(libvirt.DOMAIN_MEMORY_STAT_USABLE) {
+		if buf.Tag == int32(libvirt.DOMAIN_MEMORY_STAT_UNUSED) {
 			memUnused = buf.Val
-		} else if buf.Tag == int32(libvirt.DOMAIN_MEMORY_STAT_AVAILABLE) {
+		} else if buf.Tag == int32(libvirt.DOMAIN_MEMORY_STAT_USABLE) {
 			memMax = buf.Val
 		}
 	}
